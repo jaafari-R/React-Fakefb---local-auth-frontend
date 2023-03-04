@@ -27,7 +27,7 @@ class Login extends React.Component {
             password: document.getElementById('password').value
         }}, () => {
             const validate = this.#validateUser();
-            if(validate != 'Valid')
+            if(validate !== 'Valid')
             {
                 swal(validate, ':(', 'error');
                 return;
