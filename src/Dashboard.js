@@ -22,7 +22,7 @@ class Dashboard extends React.Component {
             return <Navigate to='/'/>;
 
         return (
-            <div>
+            <div class="text-center">
                 <h1>Welcome {this.state.user.name}</h1>
             </div>
         );
