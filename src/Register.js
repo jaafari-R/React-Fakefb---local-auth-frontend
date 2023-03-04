@@ -1,5 +1,7 @@
 import React from "react";
 
+import swal from "sweetalert";
+
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 class Register extends React.Component {
@@ -8,29 +10,36 @@ class Register extends React.Component {
         super();
 
         this.state = {
-            email: '',
-            name: '',
-            password: ''
+            user: {
+                email: '123',
+                name: '',
+                password: ''
+            }
         }
     }
 
     register(e) {
         e.preventDefault();
 
-        const user = {
+        const user = 
+
+        this.setState({user: {
             email: document.getElementById('email').value,
             name: document.getElementById('name').value,
             password: document.getElementById('password').value
-        };
-        const confirmPassword = document.getElementById('conf-password').value;
+        }}, () => {
+            const confirmPassword = document.getElementById('conf-password').value;
 
-        const validate = this.#validateUser(user, confirmPassword);
+            const validate = this.#validateUser(confirmPassword);
 
-        if(validate != 'Valid')
-        {
-            alert(validate);
-            return;
-        }
+            if(validate != 'Valid')
+            {
+                swal(validate, ':(', 'error');
+                return;
+            }
+    
+            swal('Regisetered Successfully!', ':)', 'success');
+        });
     }
 
     render()
@@ -58,18 +67,18 @@ class Register extends React.Component {
         );
     }
 
-    #validateUser(user, confirmPassword)
+    #validateUser(confirmPassword)
     {
-        if(!user.email)
+        if(!this.state.user.email)
             return 'Email is required!';
-        if(!user.name)
+        if(!this.state.user.name)
             return 'Name is required!';
-        if(!user.password)
+        if(!this.state.user.password)
             return 'Password is required!';
         if(!confirmPassword)
             return 'Confirm Password is required!';
 
-        if(user.password !== confirmPassword)
+        if(this.state.user.password !== confirmPassword)
             return 'Password and Confirm Password do not match!'
 
         return 'Valid';
