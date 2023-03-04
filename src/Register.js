@@ -3,6 +3,36 @@ import React from "react";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 class Register extends React.Component {
+
+    constructor() {
+        super();
+
+        this.state = {
+            email: '',
+            name: '',
+            password: ''
+        }
+    }
+
+    register(e) {
+        e.preventDefault();
+
+        const user = {
+            email: document.getElementById('email').value,
+            name: document.getElementById('name').value,
+            password: document.getElementById('password').value
+        };
+        const confirmPassword = document.getElementById('conf-password').value;
+
+        const validate = this.#validateUser(user, confirmPassword);
+
+        if(validate != 'Valid')
+        {
+            alert(validate);
+            return;
+        }
+    }
+
     render()
     {
         return (
@@ -12,20 +42,37 @@ class Register extends React.Component {
                 <h2>Register</h2>
                 <br />
                 <div class="row">
-                    <form action="" class="offset-md-4 col-md-4">
-                        <input class="form-control" type="email" placeholder="Email"/>
+                    <form onSubmit={(e) => this.register(e)} class="offset-md-4 col-md-4">
+                        <input class="form-control" id="email" type="email" placeholder="Email"/>
                         <br />
-                        <input class="form-control" type="name" placeholder="Name"/>
+                        <input class="form-control" id="name" type="name" placeholder="Name"/>
                         <br />
-                        <input class="form-control" type="password" placeholder="Password"/>
+                        <input class="form-control" id="password" type="password" placeholder="Password"/>
                         <br />
-                        <input class="form-control" type="conf-password" placeholder="Confitm Password"/>
+                        <input class="form-control" id="conf-password" type="conf-password" placeholder="Confirm Password"/>
                         <br />
                         <button class="form-control btn btn-success">Register</button>
                     </form>
                 </div>
             </div>
         );
+    }
+
+    #validateUser(user, confirmPassword)
+    {
+        if(!user.email)
+            return 'Email is required!';
+        if(!user.name)
+            return 'Name is required!';
+        if(!user.password)
+            return 'Password is required!';
+        if(!confirmPassword)
+            return 'Confirm Password is required!';
+
+        if(user.password !== confirmPassword)
+            return 'Password and Confirm Password do not match!'
+
+        return 'Valid';
     }
 }
 

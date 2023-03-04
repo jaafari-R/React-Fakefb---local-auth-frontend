@@ -1,3 +1,5 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import './App.css';
 import Navbar from './Navbar';
 import Register from './Register';
@@ -5,8 +7,14 @@ import Register from './Register';
 function App() {
   return (
     <div>
-      <Navbar />
-      <Register />
+      <BrowserRouter>
+        <Navbar />
+
+        <Routes>
+          <Route exact path="/" element={<Register />}/>
+        </Routes>
+
+      </BrowserRouter>
     </div>
   );
 }
