@@ -59,6 +59,24 @@ class Login extends React.Component {
     }
 
     #authenticate() {
+        let user = localStorage.getItem('user') || undefined;
+    
+        if(!user)
+            return false;
+        user = JSON.parse(user);
+
+        if(user.email === this.state.user.email
+            && user.password === this.state.user.password)
+        {
+            localStorage.setItem(
+                'login', JSON.stringify({
+                    email: user.email,
+                    name: user.name
+                })
+            );
+            window.location.replace('/dashboard');
+            return true;
+        }
         return false;
     }
 }
