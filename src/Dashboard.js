@@ -1,5 +1,5 @@
 import React from 'react';
-import { redirect } from 'react-router-dom';
+import { Navigate, redirect } from 'react-router-dom';
 
 class Dashboard extends React.Component {
 
@@ -8,10 +8,8 @@ class Dashboard extends React.Component {
 
         // Init
         let user = localStorage.getItem('login') || undefined;
-        console.log(user);
-        if(!user)
-            window.location.replace('/');
-        user = JSON.parse(user); 
+        if(user)
+            user = JSON.parse(user); 
         //
 
         this.state = {
@@ -20,11 +18,21 @@ class Dashboard extends React.Component {
     }
 
     render() {
+        if(!this.#isLoggedIn())
+            return <Navigate to='/'/>;
+
         return (
             <div>
                 <h1>Welcome {this.state.user.name}</h1>
             </div>
         );
+    }
+
+    #isLoggedIn()
+    {
+        if(this.state.user)
+            return true;
+        return false;
     }
 }
 

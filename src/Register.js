@@ -1,4 +1,5 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 
 import swal from "sweetalert";
 
@@ -20,8 +21,6 @@ class Register extends React.Component {
 
     register(e) {
         e.preventDefault();
-
-        const user = 
 
         this.setState({user: {
             email: document.getElementById('email').value,
@@ -49,8 +48,11 @@ class Register extends React.Component {
         localStorage.setItem('user', JSON.stringify(this.state.user));
     }
 
-    render()
-    {
+    render() {
+        // Redirect to dashboard if already loggedin
+        if(this.#isLoggedIn())
+            return <Navigate to='/dashboard'/>
+
         return (
             <div class="text-center">
                 <br />
@@ -89,6 +91,12 @@ class Register extends React.Component {
             return 'Password and Confirm Password do not match!'
 
         return 'Valid';
+    }
+
+    #isLoggedIn() {
+        if(localStorage.getItem('login'))
+            return true;
+        return false;
     }
 }
 

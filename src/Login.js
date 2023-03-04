@@ -1,4 +1,5 @@
 import React from "react";
+import { Navigate, redirect } from "react-router-dom";
 
 import swal from "sweetalert";
 
@@ -13,7 +14,8 @@ class Login extends React.Component {
                 name: '',
                 email: '',
                 password: ''
-            }
+            },
+            redirect: ''
         }
     }
 
@@ -45,6 +47,7 @@ class Login extends React.Component {
             <input id="email" class="login" type="email" name="email"/>
             <input id="password" class="login" type="text" name="password"/>
             <button class="login">Login</button>
+            {this.state.redirect}
         </form>
         );
     }
@@ -74,7 +77,7 @@ class Login extends React.Component {
                     name: user.name
                 })
             );
-            window.location.replace('/dashboard');
+            this.setState({redirect: <Navigate to='/dashboard'/>});
             return true;
         }
         return false;
