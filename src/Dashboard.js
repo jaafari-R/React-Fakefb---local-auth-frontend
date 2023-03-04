@@ -1,19 +1,22 @@
 import React from 'react';
+import { redirect } from 'react-router-dom';
 
 class Dashboard extends React.Component {
 
     constructor() {
-        this.state = {
-            user: {
-                email: '',
-                name: ''
-            }
-        }
-    }
+        super();
 
-    componentWillMount() {
-        const user = JSON.parse(localStorage.getItem('login'));
-        this.setState({user: {...user}});
+        // Init
+        let user = localStorage.getItem('login') || undefined;
+        console.log(user);
+        if(!user)
+            window.location.replace('/');
+        user = JSON.parse(user); 
+        //
+
+        this.state = {
+            user: user
+        }
     }
 
     render() {
