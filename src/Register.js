@@ -31,7 +31,7 @@ class Register extends React.Component {
 
             const validate = this.#validateUser(confirmPassword);
 
-            if(validate != 'Valid')
+            if(validate !== 'Valid')
             {
                 swal(validate, ':(', 'error');
                 return;

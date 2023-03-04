@@ -1,7 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router';
 
-import bootstrap from "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import './Logout.css'
 
 class Logout extends React.Component {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 class Dashboard extends React.Component {
 
