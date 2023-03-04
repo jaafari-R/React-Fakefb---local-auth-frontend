@@ -39,7 +39,14 @@ class Register extends React.Component {
             }
     
             swal('Regisetered Successfully!', ':)', 'success');
+
+            this.#saveUser();
         });
+    }
+
+    #saveUser()
+    {
+        localStorage.setItem('user', JSON.stringify(this.state.user));
     }
 
     render()
